@@ -8,4 +8,5 @@ public interface ICliente extends Remote{
 	public String getName() throws RemoteException;
 	public void exibir(String msg) throws RemoteException;
 	public void broadcast(String msg) throws RemoteException;
+	public void  msgPrivada(String msg, String remetente) throws RemoteException;
 }

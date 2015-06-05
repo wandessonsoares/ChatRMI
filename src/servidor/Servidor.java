@@ -7,7 +7,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import cliente.ICliente;
 
@@ -49,10 +51,26 @@ public class Servidor extends UnicastRemoteObject implements IServidor {
 	}
 	
 	@Override
-	public void enviarMsg(String msg) throws RemoteException {
+	public void broadcast(String msg) throws RemoteException {
 		for (ICliente user : usuarios) {
 			user.exibir(msg);
 		}
+	}
+	
+	@Override
+	public void msgPrivada(String msg, String emitente, String remetente) throws RemoteException {
+		String msgFormatada = emitente + 
+				" : " + 
+				msg.replace("\n", "") + 
+				" : " + 
+				new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy").format(new Date())+"\n";
+		
+		for(ICliente user: usuarios) {
+			if (user.getName().equals(remetente)){
+				user.exibir(msgFormatada);
+			}
+		}
+		
 	}
 
 	public static void main(String[] args) {

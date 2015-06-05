@@ -41,6 +41,14 @@ public class ClienteApp {
 				String mensagem = comando.substring(9);
 				c.broadcast(mensagem);
 			}
+			
+			if (comando.contains("send -user")){
+				String temp = comando.substring(11);
+				String remetente = temp.substring(0, temp.indexOf(" "));
+				String mensagem = temp.substring(temp.indexOf(" "));
+				
+				c.msgPrivada(mensagem, remetente);
+			}
 		}
 		
 	}
