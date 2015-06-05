@@ -1,6 +1,6 @@
 package servidor;
 
-import java.net.MalformedURLException;
+import java.net.MalformedURLException; 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -32,7 +32,6 @@ public class Servidor extends UnicastRemoteObject implements IServidor {
 	@Override
 	public void entrar(ICliente usuario) throws RemoteException {
 		usuarios.add(usuario);
-		System.out.println(usuario.getName() + " acabou de entrar");
 		for (ICliente u : usuarios) {
 			if(!u.equals(usuario)) u.exibir(usuario.getName() + " acabou de entrar \n");
 			else usuario.exibir("Bem vindo ao chat.");
@@ -46,8 +45,14 @@ public class Servidor extends UnicastRemoteObject implements IServidor {
 	@Override
 	public void removerUsuario(ICliente user) throws RemoteException {
 		usuarios.remove(user);
-		System.out.println(user.getName() + " saiu.");
 		user.exibir(user.getName() + " saiu");
+	}
+	
+	@Override
+	public void enviarMsg(String msg) throws RemoteException {
+		for (ICliente user : usuarios) {
+			user.exibir(msg);
+		}
 	}
 
 	public static void main(String[] args) {

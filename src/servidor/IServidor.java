@@ -9,4 +9,5 @@ public interface IServidor extends Remote{
 	public void listarUsuarios(ICliente usuario) throws RemoteException;
 	public void entrar(ICliente usuario) throws RemoteException;
 	public void removerUsuario(ICliente usuario) throws RemoteException;
+	public void enviarMsg(String msg) throws RemoteException;
 }

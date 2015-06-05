@@ -9,32 +9,37 @@ public class ClienteApp {
 	
 	public static void main(String[] args) throws RemoteException, MalformedURLException, NotBoundException {
 		
-		Scanner n = new Scanner(System.in);
+		Scanner teclado = new Scanner(System.in);
 		
-		String name;
+		String nome;
 		String ip;
-		String msg;
+		String comando;
 		
 		System.out.println("Digite seu nome: ");
-		name = n.nextLine().trim();
-		System.out.println("Digite o IP do server: ");
-		ip = n.nextLine().trim();
+		nome = teclado.nextLine().trim();
+		System.out.println("Digite o IP do servidor: ");
+		ip = teclado.nextLine().trim();
 		
-		Cliente c = new Cliente(name, ip);
+		Cliente c = new Cliente(nome, ip);
 		
-		boolean keep = true;
+		boolean conectado = true;
 		
-		while(keep) {
+		while(conectado) {
 			
-			msg = n.nextLine();
+			comando = teclado.nextLine();
 			
-			if (msg.equals("BYE")) {
+			if (comando.equals("bye")) {
 				c.sair();
-				keep = false;
+				conectado = false;
 			}
 			
-			if (msg.equals("LIST")) {
+			if (comando.equals("list")) {
 				c.listarUsuarios();
+			}
+			
+			if (comando.contains("send -all")){
+				String mensagem = comando.substring(9);
+				c.broadcast(mensagem);
 			}
 		}
 		

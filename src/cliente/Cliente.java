@@ -5,6 +5,8 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import servidor.IServidor;
 
@@ -29,6 +31,15 @@ public class Cliente extends UnicastRemoteObject implements ICliente {
 	@Override
 	public void exibir(String msg) throws RemoteException {
 		System.out.println(msg);
+	}
+	
+	@Override
+	public void broadcast(String msg) throws RemoteException {
+		this.servidor.enviarMsg(this.getName() + 
+				" : " + 
+				msg.replace("\n", "") + 
+				" : " + 
+				new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy").format(new Date())+"\n");
 	}
 	
 	public void listarUsuarios() throws RemoteException{
