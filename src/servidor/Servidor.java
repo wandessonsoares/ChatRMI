@@ -72,6 +72,26 @@ public class Servidor extends UnicastRemoteObject implements IServidor {
 		}
 		
 	}
+	
+	@Override
+	public void renomear(ICliente usuario, String novonome) throws RemoteException {
+		boolean usado = false;
+		
+		for (ICliente c : usuarios) {
+			if(novonome.equals(c.getName())){
+				usado = true;
+			}
+		}
+		
+		if(usado == true){
+			usuario.exibir("\n**Nome de usuario ja em uso.");
+		}
+		
+		else{
+			usuario.setName(novonome);
+			usuario.exibir("\n**Renomeado com sucesso.");
+		}
+	}
 
 	public static void main(String[] args) {
 		

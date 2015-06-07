@@ -52,11 +52,18 @@ public class Cliente extends UnicastRemoteObject implements ICliente {
 		this.servidor.listarUsuarios(this);
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}
-
+	
+	@Override
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public void renomear(String novonome) throws RemoteException{
+		this.servidor.renomear(this,novonome);
 	}
 }

@@ -7,9 +7,11 @@ import java.util.Scanner;
 
 public class ClienteApp {
 	
+	private static Scanner teclado;
+
 	public static void main(String[] args) throws RemoteException, MalformedURLException, NotBoundException {
 		
-		Scanner teclado = new Scanner(System.in);
+		teclado = new Scanner(System.in);
 		
 		String nome;
 		String ip;
@@ -48,6 +50,12 @@ public class ClienteApp {
 				String mensagem = temp.substring(temp.indexOf(" "));
 				
 				c.msgPrivada(mensagem, remetente);
+			}
+			
+			if(comando.contains("rename")){
+				String novonome = comando.substring(7);
+				
+				c.renomear(novonome);
 			}
 		}
 		
