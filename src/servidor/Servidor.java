@@ -18,6 +18,8 @@ public class Servidor extends UnicastRemoteObject implements IServidor {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<ICliente> usuarios;
 	
+	private StringBuffer conversa = new StringBuffer();
+	
 	protected Servidor() throws RemoteException {
 		this.usuarios = new ArrayList<ICliente>();
 	}
@@ -47,10 +49,10 @@ public class Servidor extends UnicastRemoteObject implements IServidor {
 	}
 	
 	@Override
-	public void broadcast(String msg) throws RemoteException {
-		for (ICliente user : usuarios) {
-			user.exibir(msg);
-		}
+	public String broadcast(String msg) throws RemoteException {
+		conversa.append(msg);
+		
+		return conversa.toString();
 	}
 	
 	@Override

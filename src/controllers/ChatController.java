@@ -83,6 +83,18 @@ public class ChatController implements Initializable{
     
     @FXML
     void enviarMsgEnter(ActionEvent event) {
+    	
+    	try {
+			ArrayList<ICliente> usuariosOnline = Chat.CLIENTE.listarUsuarios();
+			for (ICliente u : usuariosOnline) {
+				
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
     	msgs.append("Olá! \n");
     	
     	txChat.setText(msgs.toString());
@@ -90,10 +102,16 @@ public class ChatController implements Initializable{
 
     @FXML
     void enviarMsg(ActionEvent event) {
-    	msgs.append("E ae meu brother blz? Tudo ok contigo?"
-    			+ "conta as novidades! \n");
     	
-    	txChat.setText(msgs.toString());
+    	String msg = txMensagem.getText();
+    	
+    	try {
+			String conversa = Chat.CLIENTE.broadcast(msg);
+			txChat.setText(conversa);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     @Override
@@ -103,18 +121,18 @@ public class ChatController implements Initializable{
     	ObservableList<TableModel> usuarios = FXCollections.observableArrayList();
     	
     	try {
+    		
+    		// preenchendo lista de usuarios online
 			ArrayList<ICliente> usuariosOnline = Chat.CLIENTE.listarUsuarios();
 			for (ICliente u : usuariosOnline) {
 				usuarios.add(new TableModel(u.getName()));
 			}
+			tcUsuarios.setCellValueFactory(new PropertyValueFactory("nome"));
+	    	tbOnline.setItems(usuarios);
+	    	
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	tcUsuarios.setCellValueFactory(new PropertyValueFactory("nome"));
-    	
-    	tbOnline.setItems(usuarios);
     }
     
     @FXML

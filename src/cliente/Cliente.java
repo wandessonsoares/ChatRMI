@@ -35,12 +35,15 @@ public class Cliente extends UnicastRemoteObject implements ICliente {
 	}
 	
 	@Override
-	public void broadcast(String msg) throws RemoteException {
-		this.servidor.broadcast(this.getName() + 
+	public String broadcast(String msg) throws RemoteException {
+		
+		String conversa = this.servidor.broadcast(this.getName() + 
 				" : " + 
 				msg.replace("\n", "") + 
 				" : " + 
 				new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy").format(new Date())+"\n");
+		
+		return conversa;
 	}
 	
 	@Override
