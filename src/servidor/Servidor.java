@@ -23,12 +23,8 @@ public class Servidor extends UnicastRemoteObject implements IServidor {
 	}
 
 	@Override
-	public void listarUsuarios(ICliente usuario) throws RemoteException {
-		String list = "Usuarios online: \n";
-		for (ICliente u : usuarios) {
-			list += u.getName()+"\n";
-		}
-		usuario.exibir(list);
+	public ArrayList<ICliente> listarUsuarios(ICliente usuario) throws RemoteException {
+		return usuarios;
 	}
 
 	@Override

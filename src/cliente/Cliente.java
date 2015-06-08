@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import servidor.IServidor;
@@ -48,8 +49,8 @@ public class Cliente extends UnicastRemoteObject implements ICliente {
 		this.servidor.msgPrivada(msg, emitente, remetente);
 	}
 	
-	public void listarUsuarios() throws RemoteException{
-		this.servidor.listarUsuarios(this);
+	public ArrayList<ICliente> listarUsuarios() throws RemoteException{
+		return this.servidor.listarUsuarios(this);
 	}
 	
 	@Override

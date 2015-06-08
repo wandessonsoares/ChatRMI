@@ -1,9 +1,10 @@
 package controllers;
 
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import views.Chat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import models.TableModel;
+import servidor.Servidor;
+import views.Chat;
+import cliente.ICliente;
 
 public class ChatController implements Initializable{
 	
@@ -58,14 +62,23 @@ public class ChatController implements Initializable{
 
     @FXML
     void atualizar(MouseEvent event) {
-//    	ObservableList<TableModel> usuarios = FXCollections.observableArrayList();
-//    	usuarios.add(new TableModel("wandesson"));
-//    	usuarios.add(new TableModel("alex"));
-//    	usuarios.add(new TableModel("luciano"));
-//    	
-//    	tcUsuarios.setCellValueFactory(new PropertyValueFactory("nome"));
-//    	
-//    	tbOnline.setItems(usuarios);
+    	
+    	
+    	ObservableList<TableModel> usuarios = FXCollections.observableArrayList();
+    	
+    	try {
+			ArrayList<ICliente> usuariosOnline = Chat.CLIENTE.listarUsuarios();
+			for (ICliente u : usuariosOnline) {
+				usuarios.add(new TableModel(u.getName()));
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	tcUsuarios.setCellValueFactory(new PropertyValueFactory("nome"));
+    	
+    	tbOnline.setItems(usuarios);
     }
     
     @FXML
@@ -88,9 +101,16 @@ public class ChatController implements Initializable{
     	lbNome.setText(Chat.CLIENTE.getName());
     	
     	ObservableList<TableModel> usuarios = FXCollections.observableArrayList();
-    	usuarios.add(new TableModel("wandesson"));
-    	usuarios.add(new TableModel("alex"));
-    	usuarios.add(new TableModel("luciano"));
+    	
+    	try {
+			ArrayList<ICliente> usuariosOnline = Chat.CLIENTE.listarUsuarios();
+			for (ICliente u : usuariosOnline) {
+				usuarios.add(new TableModel(u.getName()));
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	tcUsuarios.setCellValueFactory(new PropertyValueFactory("nome"));
     	
