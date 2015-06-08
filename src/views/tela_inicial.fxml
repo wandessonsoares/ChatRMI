@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="318.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaInicialController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="59.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@chat.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="100.0" layoutY="150.0" text="IFPB Messenger">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f7cff30" height="200.0" layoutX="15.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="287.0" />
+      <Label layoutX="114.0" layoutY="189.0" text="Entre no Chat" />
+      <Label layoutX="23.0" layoutY="213.0" text="Digite seu nome:" />
+      <TextField fx:id="txNome" layoutX="23.0" layoutY="236.0" prefHeight="25.0" prefWidth="273.0" />
+      <Label layoutX="23.0" layoutY="271.0" text="Digite o IP do servidor:" />
+      <TextField fx:id="txIpServidor" layoutX="23.0" layoutY="293.0" onAction="#enter" prefHeight="25.0" prefWidth="273.0" />
+      <Button fx:id="btEntrar" layoutX="128.0" layoutY="336.0" mnemonicParsing="false" onAction="#entrar" text="Entrar" />
+   </children>
+</AnchorPane>
